@@ -1,0 +1,120 @@
+/* .title {
+    border-spacing: 0;
+}
+
+.title__main {
+    font-family: "Poppins", sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: 0.9rem;
+    padding: 0;
+    margin: 0;
+}
+
+.title__sub {
+    display: flex;
+    justify-content: space-between;
+}
+
+.title__underLine {
+    background-color: #2b2d42;
+    position: relative;
+    flex: 1;
+    border: 0;
+    min-width: 20px;
+    margin-right: 0.1rem;
+    height: 0.2rem;
+    bottom: 0.7rem;
+    border-radius: 50px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.title__underText {
+    font-size: 0.5rem;
+    text-align: right;
+    font-family: "Open Sans", sans-serif;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.title__underLine__notNeeded {
+    opacity: 0;
+}
+
+.title__topHeading {
+    padding-top: 10px;
+}
+
+.title__main__topHeading {
+    color: rgb(255, 255, 255);
+    opacity: 50%;
+    font-size: 1.5rem;
+}
+
+.title__underLine__topHeading {
+    height: 0.3rem;
+}
+
+.title__underText__topHeading {
+    font-size: 0.8rem;
+    bottom: 0.6rem;
+}
+ */
+
+.title {
+    border-spacing: 0;
+}
+
+.title__main {
+    font-family: "Poppins", sans-serif;
+    /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); */
+    padding: 0;
+    margin: 0;
+}
+
+.title__sub {
+    display: flex;
+    justify-content: space-between;
+}
+
+.title__underLine {
+    background-color: #2b2d42;
+    position: relative;
+    flex: 1;
+    border: 0;
+    min-width: 10px;
+    margin-right: 0.1rem;
+    height: 0.2rem;
+    bottom: 0.7rem;
+    border-radius: 50px;
+    /* box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); */
+}
+
+.title__underText {
+    font-size: 0.6rem;
+    text-align: right;
+    font-family: "Open Sans", sans-serif;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    bottom: 0.5rem;
+    /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); */
+}
+
+.title__underLine__notNeeded {
+    opacity: 0;
+}
+
+@media only screen and (max-width: 390px) {
+    .title__main {
+        font-size: 0.8em;
+    }
+}
+
+@media only screen and (max-width: 344px) {
+    .title__main {
+        font-size: 0.6em;
+    }
+}

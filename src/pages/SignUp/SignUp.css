@@ -1,0 +1,45 @@
+.signup {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
+.signup__btn {
+    height: 50px;
+    width: 80%;
+    border: 0;
+    font-family: "Poppins", sans-serif;
+    background: #14213d;
+    color: #f8b6cc;
+    font-size: x-large;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1vh;
+    max-width: 500px;
+}
+
+.signup__finalBtn {
+    color: #fca311;
+}
+
+.signup__link {
+    margin-top: 10px;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    max-width: 500px;
+}
+
+.signup__backBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Open Sans", sans-serif;
+    color: #14213d;
+    border: 2px solid #14213d;
+    padding: 5px 10px 5px 10px;
+    font-weight: 900;
+}
