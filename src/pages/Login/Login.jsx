@@ -6,6 +6,8 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { connect } from "react-redux";
+import { setCurrentUser } from "../../redux/user/user.actions";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -25,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function Login({ history }) {
+function Login({ history, setCurrentUser }) {
     const classes = useStyles();
     const [isComputing, setIsComputing] = useState(false);
     const [usn, setUsn] = useState("");
@@ -38,6 +40,7 @@ function Login({ history }) {
             pass: pass,
         };
         setIsComputing(true);
+        setCurrentUser("hello");
     };
     return (
         <div className='login'>
@@ -87,4 +90,8 @@ function Login({ history }) {
     );
 }
 
-export default withRouter(Login);
+const mapDispatchToProps = (dispatch) => ({
+    setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+});
+
+export default connect(null, mapDispatchToProps)(withRouter(Login));

@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
+import { setCurrentUser } from "../../redux/user/user.actions";
 
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
@@ -27,7 +28,7 @@ const useStyles = makeStyles({
     },
 });
 
-function Header({ history, currentUser }) {
+function Header({ history, currentUser, setCurrentUser }) {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     return (
@@ -46,6 +47,7 @@ function Header({ history, currentUser }) {
                                 button
                                 key={3}
                                 onClick={() => {
+                                    setCurrentUser(null);
                                     history.push("/login");
                                     setOpen(false);
                                 }}>
@@ -108,4 +110,8 @@ const mapSateToProps = (state) => ({
     currentUser: state.envisionUser.currentUser,
 });
 
-export default withRouter(connect(mapSateToProps)(Header));
+const mapDispatchToProps = (dispatch) => ({
+    setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+});
+
+export default withRouter(connect(mapSateToProps, mapDispatchToProps)(Header));
