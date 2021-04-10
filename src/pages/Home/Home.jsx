@@ -1,14 +1,74 @@
-import React, { useState } from "react";
-import EventCard from "../../components/EventCard/EventCard";
+import React, { useState, useEffect } from "react";
+import TabPanel from "../../components/TabPanel/TabPanel";
 import "./Home.css";
 
+import SwipeableViews from "react-swipeable-views";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+
+function a11yProps(index) {
+    return {
+        id: `full-width-tab-${index}`,
+        "aria-controls": `full-width-tabpanel-${index}`,
+    };
+}
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        backgroundColor: "rgba(0,0,0,0)",
+        color: "black",
+        backdropFilter: "none",
+    },
+    tabHead: {
+        background: "rgba(0,0,0,0) !important",
+    },
+}));
+
 function Home() {
-    const [events, setEvents] = useState([{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]);
+    const classes = useStyles();
+    const theme = useTheme();
+    const [value, setValue] = useState(-1);
+    const [departments, setDepartments] = useState(["CSE", "ME", "ISE", "E&C", "EEE", "AE", "MRE"]);
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+
+    const handleChangeIndex = (index) => {
+        setValue(index);
+    };
+
+    useEffect(() => {
+        setValue(0);
+    }, []);
+
     return (
-        <div className='home'>
-            {events.map((index) => (
-                <EventCard key={index} />
-            ))}
+        <div className={classes.root}>
+            <AppBar position='static' className={classes.tabHead}>
+                <Tabs
+                    value={value}
+                    onChange={handleChange}
+                    indicatorColor='primary'
+                    textColor='primary'
+                    variant='scrollable'
+                    aria-label='full width tabs example'>
+                    {departments.map((department, index) => (
+                        <Tab label={department} {...a11yProps(index)} />
+                    ))}
+                </Tabs>
+            </AppBar>
+            <SwipeableViews index={value} onChangeIndex={handleChangeIndex}>
+                {departments.map((department, index) => (
+                    <TabPanel
+                        key={"tab" + index}
+                        value={value}
+                        index={index}
+                        dir={theme.direction}
+                        activeIndex={value}
+                        department={department}></TabPanel>
+                ))}
+            </SwipeableViews>
         </div>
     );
 }

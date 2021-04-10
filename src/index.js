@@ -13,6 +13,7 @@ ReactDOM.render(
             <BrowserRouter>
                 <PersistGate persistor={persistor}>
                     <App />
+                    <div className='opt'>PLEASE OPEN THIS LINK USING A MOBILE BROWSER</div>
                 </PersistGate>
             </BrowserRouter>
         </Provider>

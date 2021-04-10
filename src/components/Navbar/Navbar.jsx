@@ -8,6 +8,8 @@ import HomeIcon from "@material-ui/icons/Home";
 import EventAvailableIcon from "@material-ui/icons/EventAvailable";
 import RedeemIcon from "@material-ui/icons/Redeem";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
+import StarBorderRoundedIcon from "@material-ui/icons/StarBorderRounded";
+import GradeRoundedIcon from "@material-ui/icons/GradeRounded";
 import "./Navbar.css";
 
 const useStyles = makeStyles({
@@ -46,10 +48,10 @@ function Navbar({ history }) {
                 onClick={() => history.push("/myevents")}
             />
             <BottomNavigationAction
-                label='Certificates'
-                value='/certificates'
-                icon={<RedeemIcon style={{ color: "black" }} />}
-                onClick={() => history.push("/certificate")}
+                label='V.I.P'
+                value='/vip'
+                icon={<GradeRoundedIcon style={{ color: "black" }} />}
+                onClick={() => history.push("/vip")}
             />
             <BottomNavigationAction
                 label='Profile'
@@ -57,7 +59,6 @@ function Navbar({ history }) {
                 icon={<AccountBoxIcon style={{ color: "black" }} />}
                 onClick={() => history.push("/profile")}
             />
-            {console.log(history.location)}
         </BottomNavigation>
     );
 }

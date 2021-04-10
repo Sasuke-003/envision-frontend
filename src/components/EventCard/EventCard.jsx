@@ -1,12 +1,7 @@
 import React from "react";
 import "./EventCard.css";
 import Title from "../Title/Title";
-import { createMuiTheme, responsiveFontSizes, ThemeProvider } from "@material-ui/core/styles";
-import SentimentDissatisfiedRoundedIcon from "@material-ui/icons/SentimentDissatisfiedRounded";
-import DoneAllRoundedIcon from "@material-ui/icons/DoneAllRounded";
-import CancelRoundedIcon from "@material-ui/icons/CancelRounded";
-import Typography from "@material-ui/core/Typography";
-import Avatar from "@material-ui/core/Avatar";
+import { createMuiTheme } from "@material-ui/core/styles";
 
 let theme = createMuiTheme();
 // theme = responsiveFontSizes(theme);

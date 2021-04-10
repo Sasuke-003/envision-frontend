@@ -1,4 +1,4 @@
-.eventCard {
+.myEventCard {
     /* height: 135px; */
     width: 90%;
     max-width: 500px;
@@ -13,25 +13,25 @@
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
 }
 
-.eventCard__logo {
+.myEventCard__logo {
     flex: 0.3;
     margin: 5%;
-    width: 90px;
+    width: 85px;
 
     /* object-fit: contain; */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
-.eventCard__content {
+.myEventCard__content {
     display: flex;
     flex-direction: row;
 }
 
-.eventCard__text {
+.myEventCard__text {
     padding: 3% 0 5% 0;
 }
 
-.eventCard__eventStart {
+.myEventCard__myEventStart {
     font-family: "Open Sans", sans-serif;
     padding: 0;
     margin: 0;
@@ -39,8 +39,16 @@
     top: 42%;
     font-size: 0.6rem;
 }
+.myEventCard__myEventVenue {
+    font-family: "Open Sans", sans-serif;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 59%;
+    font-size: 0.6rem;
+}
 
-.eventCard__eventType {
+.myEventCard__myEventType {
     font-family: "Poppins", sans-serif;
     padding: 0;
     margin: 0;
@@ -48,7 +56,7 @@
     top: 40%;
 }
 
-.eventCard__button {
+.myEventCard__button {
     font-family: "Poppins", sans-serif;
     position: absolute;
     min-width: 30%;
@@ -63,43 +71,43 @@
     outline: none;
 }
 
-.eventCard__button:hover {
+.myEventCard__button:hover {
     box-shadow: none;
 }
 
-.eventCard__canceled {
+.myEventCard__canceled {
     background: #d72323;
     color: #ffffff;
 }
-.eventCard__registered {
+.myEventCard__registered {
     background: #17b978;
     color: #000000;
 }
-.eventCard__registrationEnded {
+.myEventCard__registrationEnded {
     background: rgba(255, 255, 255, 0.32);
     backdrop-filter: blur(4px);
     color: #d72323;
 }
 
-.eventCard__title {
+.myEventCard__title {
     font-family: "Poppins", sans-serif;
 }
 
 @media only screen and (max-width: 400px) {
-    .eventCard__eventStart {
+    .myEventCard__eventStart {
         font-size: 0.6em;
         top: 45%;
     }
-    .eventCard__eventType {
+    .myEventCard__eventType {
         font-size: 0.7em;
         top: 35%;
     }
-    .eventCard__logo {
+    .myEventCard__logo {
         width: 60px;
     }
 }
 @media only screen and (min-width: 700px) {
-    .eventCard__logo {
+    .myEventCard__logo {
         width: 100px;
     }
 }

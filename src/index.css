@@ -23,6 +23,9 @@ body {
     -ms-user-drag: none;
     -o-user-drag: none;
 }
+.opt {
+    display: none;
+}
 
 body::-webkit-scrollbar {
     display: none;
@@ -41,8 +44,14 @@ html {
         font-size: calc(16px + 6 * ((100vw - 320px) / 680));
     }
 }
-@media screen and (min-width: 1000px) {
-    html {
-        font-size: 22px;
+@media screen and (min-width: 1025px) {
+    .app {
+        display: none;
+    }
+    .opt {
+        display: block;
+        font-family: "Poppins", sans-serif;
+        text-align: center;
+        margin-top: 50vh;
     }
 }
