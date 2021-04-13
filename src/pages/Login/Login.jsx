@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { connect } from "react-redux";
-import { setCurrentUser } from "../../redux/user/user.actions";
+import { setCurrentUserStatus } from "../../redux/userStatus/userStatus.actions";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function Login({ history, setCurrentUser }) {
+function Login({ history, setCurrentUserStatus }) {
     const classes = useStyles();
     const [isComputing, setIsComputing] = useState(false);
     const [usn, setUsn] = useState("");
@@ -40,7 +40,7 @@ function Login({ history, setCurrentUser }) {
             pass: pass,
         };
         setIsComputing(true);
-        setCurrentUser("hello");
+        setCurrentUserStatus(["isLoggedIn", true]);
     };
     return (
         <div className='login'>
@@ -91,7 +91,7 @@ function Login({ history, setCurrentUser }) {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+    setCurrentUserStatus: (user) => dispatch(setCurrentUserStatus(user)),
 });
 
 export default connect(null, mapDispatchToProps)(withRouter(Login));

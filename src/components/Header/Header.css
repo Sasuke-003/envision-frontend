@@ -14,7 +14,7 @@
     transform: rotateY(180deg) !important;
 } */
 
-.MuiPaper-root {
+.MuiDrawer-paper {
     backdrop-filter: blur(4px) !important;
     background-color: rgba(255, 255, 255, 0.2) !important;
 }

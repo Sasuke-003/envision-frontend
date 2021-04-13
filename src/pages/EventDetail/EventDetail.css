@@ -1,0 +1,85 @@
+.eventDetail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.eventDetail__image {
+    object-fit: contain;
+    width: 90%;
+    /* max-width: 500px; */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.16);
+    margin-bottom: 2vh;
+}
+
+.eventDetail__content {
+    width: 90%;
+    text-align: left;
+}
+
+.eventDetail__content .eventDetail__text {
+    margin: 0 0 1vh 0;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 600;
+}
+
+.eventDetail__divider {
+    margin: 0;
+    border: 0;
+    /* color: rgba(43, 45, 66, 0.32); */
+    background-color: rgba(43, 45, 66, 0.32);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    width: 90%;
+    height: 0.22vh;
+    border-radius: 50px;
+}
+
+.eventDetail__mainText {
+    font-family: "Poppins", sans-serif;
+    margin: 0.5vh 0 0.1vh 0;
+}
+
+.eventDetail__rules {
+    font-family: "Open Sans", sans-serif;
+    font-size: 0.75rem;
+}
+
+.eventDetail__registerButton {
+    width: 90%;
+    height: 50px;
+    background-color: #14213d;
+    margin-bottom: 10vh;
+    box-shadow: 0 0px 15px rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.eventDetail__disabledButton {
+    background-color: #e0e0e070;
+}
+
+.eventDetail__registeredButton {
+    background-color: #17b978;
+}
+
+.eventDetail__registerButton h2 {
+    font-family: "Poppins", sans-serif;
+    color: #fca311;
+    /* margin-left: 5%; */
+}
+
+.eventDetail__registerButton h2.eventDetail__buttonText {
+    color: #000000;
+    margin-left: 5%;
+}
+
+.eventDetail__disabledButton h2 {
+    color: #a6a6a670;
+}
+
+.eventDetail__myTeam {
+    width: 90%;
+    text-align: left;
+    position: relative;
+}

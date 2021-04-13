@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
-import { setCurrentUser } from "../../redux/user/user.actions";
+import { setCurrentUserIsLoggedIn } from "../../redux/userStatus/userStatus.actions";
 
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
@@ -28,7 +28,7 @@ const useStyles = makeStyles({
     },
 });
 
-function Header({ history, currentUser, setCurrentUser }) {
+function Header({ history, userStatus, setCurrentUserIsLoggedIn }) {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     return (
@@ -42,12 +42,12 @@ function Header({ history, currentUser, setCurrentUser }) {
                 <div className={classes.list} role='presentation'>
                     <List>
                         <Divider />
-                        {currentUser ? (
+                        {userStatus.isLoggedIn ? (
                             <ListItem
                                 button
                                 key={3}
                                 onClick={() => {
-                                    setCurrentUser(null);
+                                    setCurrentUserIsLoggedIn(false);
                                     history.push("/login");
                                     setOpen(false);
                                 }}>
@@ -107,11 +107,11 @@ function Header({ history, currentUser, setCurrentUser }) {
 }
 
 const mapSateToProps = (state) => ({
-    currentUser: state.envisionUser.currentUser,
+    userStatus: state.userStatus.currentUserStatus,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+    setCurrentUserIsLoggedIn: (user) => dispatch(setCurrentUserIsLoggedIn(user)),
 });
 
 export default withRouter(connect(mapSateToProps, mapDispatchToProps)(Header));

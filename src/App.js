@@ -12,28 +12,35 @@ import MyEvents from "./pages/MyEvents/MyEvents";
 import Certificate from "./pages/VIP/VIP";
 import Profile from "./pages/Profile/Profile";
 import Navbar from "./components/Navbar/Navbar";
+import EventDetail from "./pages/EventDetail/EventDetail";
 
 class App extends React.Component {
     render() {
+        const { isLoggedIn } = this.props.userStatus;
+
         return (
             <div className='app'>
                 <Header />
                 <Switch>
                     <Route exact path='/' render={() => <Home />} />
-                    <Route exact path='/login' render={() => (this.props.currentUser ? <Redirect to='/' /> : <Login />)} />
-                    <Route exact path='/signup' render={() => (this.props.currentUser ? <Redirect to='/' /> : <SignUp />)} />
-                    <Route exact path='/myevents' render={() => (!this.props.currentUser ? <Redirect to='/login' /> : <MyEvents />)} />
-                    <Route exact path='/vip' render={() => (!this.props.currentUser ? <Redirect to='/login' /> : <Certificate />)} />
-                    <Route exact path='/profile' render={() => (!this.props.currentUser ? <Redirect to='/login' /> : <Profile />)} />
+                    <Route exact path='/login' render={() => (isLoggedIn ? <Redirect to='/' /> : <Login />)} />
+                    <Route exact path='/signup' render={() => (isLoggedIn ? <Redirect to='/' /> : <SignUp />)} />
+                    <Route exact path='/myevents' render={() => (!isLoggedIn ? <Redirect to='/login' /> : <MyEvents />)} />
+                    <Route exact path='/vip' render={() => (!isLoggedIn ? <Redirect to='/login' /> : <Certificate />)} />
+                    <Route exact path='/profile' render={() => (!isLoggedIn ? <Redirect to='/login' /> : <Profile />)} />
+                    <Route path='/event/:id' render={() => <EventDetail />} />
                 </Switch>
-                {this.props.currentUser ? <Navbar /> : null}
+                {console.log("hello")}
+                {console.log(this.props.userToken)}
+                {isLoggedIn ? <Navbar /> : null}
             </div>
         );
     }
 }
 
 const mapSateToProps = (state) => ({
-    currentUser: state.envisionUser.currentUser,
+    userStatus: state.userStatus.currentUserStatus,
+    userToken: state.userToken,
 });
 
 export default connect(mapSateToProps)(App);

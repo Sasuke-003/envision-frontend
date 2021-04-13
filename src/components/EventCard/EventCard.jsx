@@ -1,6 +1,7 @@
 import React from "react";
 import "./EventCard.css";
 import Title from "../Title/Title";
+import { withRouter } from "react-router";
 import { createMuiTheme } from "@material-ui/core/styles";
 
 let theme = createMuiTheme();
@@ -17,14 +18,16 @@ theme.typography.h2 = {
 };
 
 function EventCard({
+    id = "abcd",
     startDate = "Today at 3pm (202-ME BLOCK)",
     venue = "202 (ME BLOCK)",
     isRegistered = false,
     isCanceled = false,
     isRegistrationClosed = false,
+    history,
 }) {
     return (
-        <div className='eventCard'>
+        <div className='eventCard' onClick={() => history.push("/event/" + id)}>
             <div className='eventCard__content'>
                 <img
                     className='eventCard__logo'
@@ -59,4 +62,4 @@ function EventCard({
     );
 }
 
-export default EventCard;
+export default withRouter(EventCard);

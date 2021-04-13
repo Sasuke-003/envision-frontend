@@ -88,7 +88,7 @@
     margin-right: 0.1rem;
     height: 0.2rem;
     bottom: 0.7rem;
-    border-radius: 50px;
+    /* border-radius: 50px; */
     /* box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); */
 }
 
@@ -117,4 +117,22 @@
     .title__main {
         font-size: 0.6em;
     }
+}
+
+.title__main__topHeading {
+    font-size: 1.3rem;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.title__underLine__topHeading {
+    height: 0.3rem;
+    /* bottom: 0.5rem; */
+
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.title__underText__topHeading {
+    font-size: 0.8rem;
+    bottom: 0.6rem;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
 }

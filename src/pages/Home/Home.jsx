@@ -7,6 +7,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import axios from "axios";
 
 function a11yProps(index) {
     return {
@@ -30,6 +31,7 @@ function Home() {
     const classes = useStyles();
     const theme = useTheme();
     const [value, setValue] = useState(-1);
+    const [valu, setValu] = useState("");
     const [departments, setDepartments] = useState(["CSE", "ME", "ISE", "E&C", "EEE", "AE", "MRE"]);
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -41,6 +43,18 @@ function Home() {
 
     useEffect(() => {
         setValue(0);
+
+        // const getData = async () => {
+        //     try {
+        //         let res = await axios.get("https://sit-envision.herokuapp.com/event/department-list");
+        //         console.log("hello");
+        //         console.log(res);
+        //     } catch (error) {
+        //         console.log("bye");
+        //         console.log(error);
+        //     }
+        // };
+        // getData();
     }, []);
 
     return (

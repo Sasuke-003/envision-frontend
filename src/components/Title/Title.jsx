@@ -1,7 +1,7 @@
 import React from "react";
 import "./Title.css";
 
-function Title({ mainTitle = "PAPER PRESENTATION", subTitle = "by CSE Department", isLineNeeded = true, isTopHeading = true }) {
+function Title({ mainTitle = "PAPER PRESENTATION", subTitle = "by CSE Department", isLineNeeded = true, isTopHeading = false }) {
     return (
         // <table className={`title ${isTopHeading ? "title__topHeading" : ""}`}>
         //     <tr>
