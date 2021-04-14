@@ -1,0 +1,41 @@
+.profile {
+    display: flex;
+    flex-direction: column;
+    margin-top: 3vh;
+    align-items: center;
+    min-height: 125vh;
+}
+
+.profile__nonEditable {
+    text-align: center;
+}
+
+.profile__nonEditable h3 {
+    font-family: "Poppins", sans-serif;
+    margin: 2vh 0 0 0;
+}
+
+.profile__nonEditable h5 {
+    font-family: "Open Sans", sans-serif;
+    margin: 0 0 2vh 0;
+}
+
+.profile__divider {
+    margin: 0;
+    border: 0;
+    /* color: rgba(43, 45, 66, 0.32); */
+    background-color: rgba(43, 45, 66, 0.2);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    width: 90%;
+    height: 0.22vh;
+    border-radius: 50px;
+}
+
+.profile__editable {
+    width: 90%;
+}
+
+.profile__mainText {
+    font-family: "Poppins", sans-serif;
+    margin: 1vh 0 0.1vh 0;
+}

@@ -20,6 +20,8 @@ const useStyles = makeStyles({
         background: "rgba(255, 255, 255, 0.32)",
         backdropFilter: "blur(20px)",
         boxShadow: "0 -1px 10px rgba(0, 0, 0, 0.25)",
+        overflow: "hidden",
+        zIndex: "100",
     },
 });
 
@@ -39,7 +41,7 @@ function Navbar({ history }) {
     };
 
     return (
-        <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
+        <BottomNavigation value={value} onChange={handleChange} className={classes.root} id='bottomNav'>
             <BottomNavigationAction label='Home' value='/' icon={<HomeIcon style={{ color: "black" }} />} onClick={() => history.push("/")} />
             <BottomNavigationAction
                 label='MyEvents'

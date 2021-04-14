@@ -13,6 +13,7 @@ import Certificate from "./pages/VIP/VIP";
 import Profile from "./pages/Profile/Profile";
 import Navbar from "./components/Navbar/Navbar";
 import EventDetail from "./pages/EventDetail/EventDetail";
+import AttendanceMarker from "./components/QrScanner/QrSCanner";
 
 class App extends React.Component {
     render() {
@@ -28,6 +29,7 @@ class App extends React.Component {
                     <Route exact path='/myevents' render={() => (!isLoggedIn ? <Redirect to='/login' /> : <MyEvents />)} />
                     <Route exact path='/vip' render={() => (!isLoggedIn ? <Redirect to='/login' /> : <Certificate />)} />
                     <Route exact path='/profile' render={() => (!isLoggedIn ? <Redirect to='/login' /> : <Profile />)} />
+                    <Route exact path='/attendanceMarker' render={() => (!isLoggedIn ? <Redirect to='/login' /> : <AttendanceMarker />)} />
                     <Route path='/event/:id' render={() => <EventDetail />} />
                 </Switch>
                 {console.log("hello")}

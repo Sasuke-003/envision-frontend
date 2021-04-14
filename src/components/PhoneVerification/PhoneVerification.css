@@ -1,0 +1,8 @@
+.phoneVerification {
+    width: 90%;
+}
+
+.phoneVerification__mainText {
+    font-family: "Poppins", sans-serif;
+    margin: 1vh 0 0.1vh 0;
+}

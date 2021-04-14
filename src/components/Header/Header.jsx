@@ -21,10 +21,12 @@ import HomeIcon from "@material-ui/icons/Home";
 
 const useStyles = makeStyles({
     list: {
-        width: 130,
+        width: 180,
+        zIndex: "99999999",
     },
     root: {
         color: "black",
+        zIndex: "101",
     },
 });
 
@@ -43,19 +45,34 @@ function Header({ history, userStatus, setCurrentUserIsLoggedIn }) {
                     <List>
                         <Divider />
                         {userStatus.isLoggedIn ? (
-                            <ListItem
-                                button
-                                key={3}
-                                onClick={() => {
-                                    setCurrentUserIsLoggedIn(false);
-                                    history.push("/login");
-                                    setOpen(false);
-                                }}>
-                                <ListItemIcon>
-                                    <PowerSettingsNewRoundedIcon style={{ color: "white" }} />
-                                </ListItemIcon>
-                                <ListItemText primary={"LogOut"} style={{ color: "white" }} />
-                            </ListItem>
+                            <div>
+                                <ListItem
+                                    button
+                                    key={3}
+                                    onClick={() => {
+                                        setCurrentUserIsLoggedIn(false);
+                                        history.push("/login");
+                                        setOpen(false);
+                                    }}>
+                                    <ListItemIcon>
+                                        <PowerSettingsNewRoundedIcon style={{ color: "white" }} />
+                                    </ListItemIcon>
+                                    <ListItemText primary={"LogOut"} style={{ color: "white" }} />
+                                </ListItem>
+                                <Divider />
+                                <ListItem
+                                    button
+                                    key={2}
+                                    onClick={() => {
+                                        history.push("/attendanceMarker");
+                                        setOpen(false);
+                                    }}>
+                                    <ListItemIcon>
+                                        <PersonAddIcon style={{ color: "white" }} />
+                                    </ListItemIcon>
+                                    <ListItemText primary={"Attendance"} style={{ color: "white" }} />
+                                </ListItem>
+                            </div>
                         ) : (
                             <div>
                                 <ListItem
