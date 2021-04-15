@@ -30,13 +30,13 @@ const useStyles = makeStyles((theme) => ({
 function Login({ history, setCurrentUserStatus }) {
     const classes = useStyles();
     const [isComputing, setIsComputing] = useState(false);
-    const [usn, setUsn] = useState("");
+    const [email, setEmail] = useState("");
     const [pass, setPass] = useState("");
-    const [usnErrorMsg, setUsnErrorMsg] = useState("");
+    const [emailErrorMsg, setEmailErrorMsg] = useState("");
     const [passErrorMsg, setPassErrorMsg] = useState("");
     const handleLogin = () => {
         const loginData = {
-            usn: usn,
+            email: email,
             pass: pass,
         };
         setIsComputing(true);
@@ -47,12 +47,13 @@ function Login({ history, setCurrentUserStatus }) {
             <div className='login__logo'></div>
             <form className={classes.root} noValidate autoComplete='off'>
                 <TextField
-                    value={usn}
-                    onChange={(e) => setUsn(e.target.value)}
+                    value={email}
+                    type='email'
+                    onChange={(e) => setEmail(e.target.value)}
                     id='outlined-error-helper-text'
-                    label='USN'
-                    error={usnErrorMsg === "" ? false : true}
-                    helperText={usnErrorMsg}
+                    label='EMAIL'
+                    error={emailErrorMsg === "" ? false : true}
+                    helperText={emailErrorMsg}
                     variant='outlined'
                 />
 

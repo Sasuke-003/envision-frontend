@@ -44,14 +44,8 @@ html {
         font-size: calc(16px + 6 * ((100vw - 320px) / 680));
     }
 }
-@media screen and (min-width: 1025px) {
-    .app {
+@media screen and (min-device-width: 1024px) {
+    html {
         display: none;
-    }
-    .opt {
-        display: block;
-        font-family: "Poppins", sans-serif;
-        text-align: center;
-        margin-top: 50vh;
     }
 }

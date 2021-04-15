@@ -46,7 +46,7 @@ export default function ChipsArray({ chipData, isRegistered }) {
                         <Chip
                             icon={icon}
                             label={data.label}
-                            onDelete={!isRegistered ? (index === 0 ? undefined : handleDelete(data)) : undefined}
+                            // onDelete={!isRegistered ? (index === 0 ? undefined : handleDelete(data)) : undefined}
                             className={classes.chip}
                         />
                     </li>

@@ -1,6 +1,10 @@
 import { SnackbarActionTypes } from "./snackbar.types";
 
-const INITIAL_STATE = false;
+const INITIAL_STATE = {
+    open: false,
+    msg: "success",
+    status: "success",
+};
 
 const snackbarReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {

@@ -8,6 +8,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
 import EditIcon from "@material-ui/icons/Edit";
+import DoneAllRoundedIcon from "@material-ui/icons/DoneAllRounded";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -33,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
         "& .MuiButton-contained.Mui-disabled": {
             color: "rgba(0, 0, 0, 0.26)",
             backgroundColor: "rgba(255, 255, 255, 0.12)",
+            boxShadow: "none",
         },
     },
 }));
@@ -43,22 +45,25 @@ function Profile() {
     const [usnErrorMsg, setUsnErrorMsg] = useState("");
     const [gender, setGender] = useState("MALE");
     const [editing, setEditing] = useState(false);
+    const [emailVerified, setEmailVerified] = useState(false);
     return (
         <div className='profile'>
             <QrGenerator />
-            <div className='profile__nonEditable'>
+
+            <hr className='profile__divider top' />
+            {/* <div className='profile__nonEditable'>
                 <h3>MOHAMMAD HAFEEZ S</h3>
                 <h5>muhammadhafeez896@gmail.com</h5>
-            </div>
-            <hr className='profile__divider' />
-            {/* <div className='profile__editable'>
+            </div> */}
+            {/* <hr className='profile__divider' /> */}
+            <div className='profile__editable'>
                 <h3 className='profile__mainText'>BASIC INFO</h3>
                 <form className={classes.root} noValidate autoComplete='off'>
                     <TextField
                         value='MOHAMMAD HAFEEZ S'
                         size='small'
                         id='outlined-error-helper-text'
-                        label='NAME'
+                        label='FULL NAME'
                         variant='outlined'
                         disabled='true'
                     />
@@ -66,13 +71,21 @@ function Profile() {
                         value='muhammadhafeez896@gmail.com'
                         size='small'
                         id='outlined-error-helper-text'
-                        label='EMAIl'
+                        label='EMAIL'
                         variant='outlined'
                         disabled='true'
                     />
+                    <Button
+                        variant='contained'
+                        color='primary'
+                        onClick={() => setEmailVerified((prevState) => !prevState)}
+                        disabled={emailVerified}
+                        startIcon={emailVerified ? <DoneAllRoundedIcon /> : null}>
+                        {emailVerified ? "VERIFIED" : "VERIFY"}
+                    </Button>
                 </form>
-            </div> */}
-            {/* <hr className='profile__divider' /> */}
+            </div>
+            <hr className='profile__divider' />
             <PhoneVerification />
             <hr className='profile__divider' />
             <div className='profile__editable'>
@@ -90,6 +103,7 @@ function Profile() {
                         helperText={usnErrorMsg}
                         variant='outlined'
                         disabled={!editing}
+                        inputProps={{ style: { textTransform: "uppercase" } }}
                     />
                     <TextField
                         id='outlined-select-currency'
@@ -110,8 +124,11 @@ function Profile() {
                             </MenuItem>
                         ))}
                     </TextField>
-                    <Button variant='contained' color='primary' onClick={() => setEditing((prevState) => !prevState)}>
-                        {editing ? <SaveIcon /> : <EditIcon />} &nbsp;&nbsp;&nbsp;&nbsp;
+                    <Button
+                        variant='contained'
+                        color='primary'
+                        onClick={() => setEditing((prevState) => !prevState)}
+                        startIcon={editing ? <SaveIcon /> : <EditIcon />}>
                         {editing ? "SAVE CHANGES" : "EDIT"}
                     </Button>
                 </form>

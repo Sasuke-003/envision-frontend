@@ -3,7 +3,7 @@ import TextField from "@material-ui/core/TextField";
 import "./PhoneVerification.css";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-import HomeIcon from "@material-ui/icons/Home";
+import DoneAllRoundedIcon from "@material-ui/icons/DoneAllRounded";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
         "& .MuiButton-contained.Mui-disabled": {
             color: "rgba(0, 0, 0, 0.26)",
             backgroundColor: "rgba(255, 255, 255, 0.12)",
+            boxShadow: "none",
         },
         display: "flex",
         justifyContent: "space-between",
@@ -55,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
         "& .MuiButton-contained.Mui-disabled": {
             color: "rgba(0, 0, 0, 0.26)",
             backgroundColor: "rgba(255, 255, 255, 0.12)",
+            boxShadow: "none",
         },
         display: "flex",
         justifyContent: "space-between",
@@ -63,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
     verified: {
         "& .MuiTextField-root": {
             marginTop: theme.spacing(2),
-            width: "100%",
+            width: "60%",
             maxWidth: "500px",
             color: "black",
             marginRight: theme.spacing(2),
@@ -72,11 +74,23 @@ const useStyles = makeStyles((theme) => ({
             color: "black",
             // fontFamily: "'Poppins', sans-serif",
         },
+        "& .MuiButton-root": {
+            marginTop: theme.spacing(2),
+            width: "40%",
+            backgroundColor: "#14213d",
+            color: "#fca311",
+            fontFamily: "'Poppins', sans-serif",
+        },
+        "& .MuiButton-contained.Mui-disabled": {
+            color: "rgba(0, 0, 0, 0.26)",
+            backgroundColor: "rgba(255, 255, 255, 0.12)",
+            boxShadow: "none",
+        },
         marginBottom: theme.spacing(2),
     },
 }));
 
-function PhoneVerification({ phoneNumber = "" }) {
+function PhoneVerification({ phoneNumber = "9731299294" }) {
     const classes = useStyles();
 
     const [phone, setPhone] = useState(phoneNumber);
@@ -160,9 +174,12 @@ function PhoneVerification({ phoneNumber = "" }) {
     ) : (
         <div className='phoneVerification'>
             {" "}
-            <form className={classes.verified} noValidate autoComplete='off'>
-                <h3 className='phoneVerification__mainText'>CONTACT INFO</h3>
+            <h3 className='phoneVerification__mainText'>CONTACT INFO</h3>
+            <form className={classes.otp} noValidate autoComplete='off'>
                 <TextField value={phoneNumber} size='small' label='Phone Number' variant='outlined' disabled />
+                <Button variant='contained' color='primary' disabled='true' startIcon={<DoneAllRoundedIcon />}>
+                    VERIFIED
+                </Button>
             </form>
         </div>
     );

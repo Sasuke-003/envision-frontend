@@ -11,6 +11,7 @@ class QrScanner extends Component {
         if (data) {
             this.setState({
                 result: data,
+                cameraOpen: false,
             });
         }
     };
@@ -26,12 +27,15 @@ class QrScanner extends Component {
     render() {
         const { result, cameraOpen } = this.state;
 
-        return cameraOpen ? (
+        return (
             <div>
-                <QrReader delay={300} onError={this.handleError} onScan={this.handleScan} style={{ width: "100%" }} facingMode='environment' />
+                {cameraOpen ? (
+                    <QrReader delay={300} onError={this.handleError} onScan={this.handleScan} style={{ width: "100%" }} facingMode='environment' />
+                ) : null}
+
                 <p>{result}</p>
             </div>
-        ) : null;
+        );
     }
 }
 export default QrScanner;

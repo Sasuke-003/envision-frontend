@@ -45,12 +45,6 @@ export default function Snackbars({ status, message, open, handleClose, autoHide
                 {message}
             </MuiAlert>
         );
-    else
-        Alert = (
-            <MuiAlert elevation={6} variant='filled' onClose={handleClose} severity='error'>
-                Something went wrong!
-            </MuiAlert>
-        );
 
     return (
         <div className={classes.root}>

@@ -8,6 +8,8 @@ import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import "./EventDetail.css";
 import ChipsArray from "../../components/TeamChips/TeamChips";
 import InvitePopup from "../../components/InvitePopup/InvitePopup";
+import CustomButton from "../../components/CustomButton/CustomButton";
+import SentimentDissatisfiedRoundedIcon from "@material-ui/icons/SentimentDissatisfiedRounded";
 
 const useStyles = makeStyles((theme) => ({
     progress: {
@@ -15,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
         marginTop: "35vh",
     },
     btnProgress: {
-        color: "#f8b6cc",
+        color: "#fca311",
     },
     addBtn: {
         position: "absolute",
@@ -43,6 +45,8 @@ function EventDetail({ match }) {
         coordinator: "Mr.ABCDE FGHIJK",
         coordinatorNumber: "9766546443",
         isRegistered: false,
+        isRegistrationOpen: false,
+        isEventCanceled: false,
     });
 
     const [isComputing, setIsComputing] = useState(false);
@@ -52,7 +56,6 @@ function EventDetail({ match }) {
 
     const handleRegister = () => {
         // code for register request
-        alert("hello");
     };
 
     return isComputing ? (
@@ -104,7 +107,7 @@ function EventDetail({ match }) {
                     <br /> For more info contact Event Coordinator.
                 </p>
             </div>
-            <div
+            {/* <div
                 className={`eventDetail__registerButton ${eventData.isRegistered ? "eventDetail__registeredButton" : ""}  ${
                     btnDisabled ? "eventDetail__disabledButton" : ""
                 } `}
@@ -120,7 +123,33 @@ function EventDetail({ match }) {
                 ) : (
                     <CircularProgress className={classes.btnProgress} size='35px' />
                 )}
-            </div>
+            </div> */}
+            <CustomButton
+                style={{ width: "90%" }}
+                size='large'
+                onClick={!btnDisabled ? (!eventData.isRegistered ? handleRegister : undefined) : undefined}
+                startIcon={
+                    !isRegistering && eventData.isRegistered ? (
+                        <DoneAllRoundedIcon />
+                    ) : !eventData.isRegistrationOpen ? (
+                        <SentimentDissatisfiedRoundedIcon />
+                    ) : null
+                }
+                textColor={eventData.isRegistered ? "#17b978" : eventData.isRegistrationOpen ? "#fca311" : "#d72323"}
+                color={eventData.isRegistered || !eventData.isRegistrationOpen ? "#ffffff10" : "#14213d"}>
+                {!isRegistering ? (
+                    eventData.isRegistered ? (
+                        "REGISTERED"
+                    ) : eventData.isRegistrationOpen ? (
+                        "REGISTER"
+                    ) : (
+                        "REGISTRATION CLOSED"
+                    )
+                ) : (
+                    <CircularProgress className={classes.btnProgress} size='35px' />
+                )}
+            </CustomButton>
+
             <InvitePopup open={open} handleClose={() => setOpen(false)} />
         </div>
     );

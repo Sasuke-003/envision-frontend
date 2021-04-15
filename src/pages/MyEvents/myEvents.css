@@ -1,0 +1,14 @@
+.myEvents {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-bottom: 20vh;
+}
+
+.myEvents__mainText {
+    font-family: "Poppins", sans-serif;
+    margin: 1vh 0 2vh 0;
+    text-align: left;
+    width: 90%;
+}

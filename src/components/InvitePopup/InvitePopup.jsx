@@ -7,7 +7,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { makeStyles } from "@material-ui/core/styles";
-import { validateEmail, throwSuccessMsg } from "../../Util";
+import { validateEmail, getPopup } from "../../Util";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -36,6 +36,7 @@ export default function InvitePopup({ open, handleClose }) {
     const handleInvite = () => {
         handleClose();
         setOpenSnackbar(true);
+        getPopup("success", "Email Sent");
     };
 
     return (
@@ -68,7 +69,7 @@ export default function InvitePopup({ open, handleClose }) {
                     </Button>
                 </DialogActions>
             </Dialog>
-            {throwSuccessMsg(openSnackbar, () => setOpenSnackbar(false), "Email Sent")}
+            {/* {throwSuccessMsg(openSnackbar, () => setOpenSnackbar(false), "Email Sent")} */}
         </div>
     );
 }

@@ -3,7 +3,7 @@
     flex-direction: column;
     margin-top: 3vh;
     align-items: center;
-    min-height: 125vh;
+    min-height: 150vh;
 }
 
 .profile__nonEditable {
@@ -29,6 +29,11 @@
     width: 90%;
     height: 0.22vh;
     border-radius: 50px;
+}
+
+.profile__divider.top {
+    margin: 0;
+    margin-top: 3vh;
 }
 
 .profile__editable {

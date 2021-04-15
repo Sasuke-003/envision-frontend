@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import CustomStepper from "../../components/CustomStepper/CustomStepper";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import { validateEmail } from "../../Util";
+import CustomButton from "../../components/CustomButton/CustomButton";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -133,14 +134,17 @@ function SignUp() {
             ) : null}
 
             {step === 2 ? (
-                <div className='signup__btn signup__finalBtn' onClick={() => setStep((prevStep) => (prevStep !== 2 ? prevStep + 1 : prevStep))}>
+                <CustomButton size='large' style={{ width: "80%" }} onClick={() => setStep((prevStep) => (prevStep !== 2 ? prevStep + 1 : prevStep))}>
                     SIGN UP
-                </div>
+                </CustomButton>
             ) : (
-                <div className='signup__btn' onClick={() => setStep((prevStep) => (prevStep !== 2 ? prevStep + 1 : prevStep))}>
-                    PROCEED &nbsp;
-                    <NavigateNextIcon fontSize='large' style={{ color: "#f8b6cc" }} />
-                </div>
+                <CustomButton
+                    size='large'
+                    style={{ width: "80%" }}
+                    onClick={() => setStep((prevStep) => (prevStep !== 2 ? prevStep + 1 : prevStep))}
+                    endIcon={<NavigateNextIcon fontSize='large' style={{ color: "#fca311" }} />}>
+                    PROCEED
+                </CustomButton>
             )}
             {step === 0 ? null : (
                 <div className='signup__link'>

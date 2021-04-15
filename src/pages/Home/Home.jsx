@@ -7,6 +7,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+
 import axios from "axios";
 
 function a11yProps(index) {
@@ -24,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
     },
     tabHead: {
         background: "rgba(0,0,0,0) !important",
+    },
+    dep: {
+        fontSize: "1rem",
     },
 }));
 
@@ -68,7 +72,7 @@ function Home() {
                     variant='scrollable'
                     aria-label='full width tabs example'>
                     {departments.map((department, index) => (
-                        <Tab label={department} {...a11yProps(index)} />
+                        <Tab className={classes.dep} label={department} {...a11yProps(index)} />
                     ))}
                 </Tabs>
             </AppBar>
