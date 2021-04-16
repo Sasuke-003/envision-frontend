@@ -50,7 +50,7 @@ function Navbar({ history }) {
                 onClick={() => history.push("/myevents")}
             />
             <BottomNavigationAction
-                label='V.I.P'
+                label='V I P'
                 value='/vip'
                 icon={<GradeRoundedIcon style={{ color: "black" }} />}
                 onClick={() => history.push("/vip")}

@@ -1,9 +1,9 @@
 .profile {
     display: flex;
     flex-direction: column;
-    margin-top: 3vh;
+    margin-top: 2vh;
     align-items: center;
-    min-height: 150vh;
+    margin-bottom: 50vh;
 }
 
 .profile__nonEditable {
@@ -33,7 +33,7 @@
 
 .profile__divider.top {
     margin: 0;
-    margin-top: 3vh;
+    margin-top: 5vh;
 }
 
 .profile__editable {
