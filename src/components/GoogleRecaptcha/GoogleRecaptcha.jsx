@@ -1,17 +1,8 @@
 import React from "react";
-import ReCAPTCHA from "react-google-recaptcha";
+import Recaptcha from "react-invisible-recaptcha";
 
-function GoogleRecaptcha({ recaptchaRef }) {
-    return (
-        <ReCAPTCHA
-            ref={recaptchaRef}
-            render='explicit'
-            sitekey='6LfDTawaAAAAALjcHHw3DhIpSWaXork6_SngNf7n'
-            size='invisible'
-            onloadCallback={() => alert("loaded")}
-            // onChange={(t) => alert(t)}
-        />
-    );
+function GoogleRecaptcha({ ...otherProps }) {
+    return <Recaptcha {...otherProps} />;
 }
 
 export default GoogleRecaptcha;

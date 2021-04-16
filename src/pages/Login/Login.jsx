@@ -8,7 +8,7 @@ import { withRouter } from "react-router";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { connect } from "react-redux";
 import { setCurrentUserStatus } from "../../redux/userStatus/userStatus.actions";
-import GoogleRecaptcha from "../../components/GoogleRecaptcha/GoogleRecaptcha";
+
 import CustomButton from "../../components/CustomButton/CustomButton";
 import Recaptcha from "react-invisible-recaptcha";
 
@@ -78,6 +78,7 @@ function Login({ history, setCurrentUserStatus }) {
                     style={{ margin: 0, marginBottom: "3vh" }}
                 />
                 <Recaptcha
+                    render='explicit'
                     ref={recaptchaRef}
                     sitekey='6LfDTawaAAAAALjcHHw3DhIpSWaXork6_SngNf7n'
                     onResolved={() => setCurrentUserStatus(["isLoggedIn", true])}
