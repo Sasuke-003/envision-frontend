@@ -253,17 +253,10 @@ function SignUp() {
     const afterVerification = async (token) => {
         const data = {
             secret: "6LfDTawaAAAAAP7kCPYLRD6UHnuf9hbFDTiXeOVI",
-            response: token,
         };
-        let config = {
-            headers: {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "POST",
-            },
-        };
+
         try {
-            const res = await axios.post("https://www.google.com/recaptcha/api/siteverify", data, config);
+            const res = await axios.post("https://www.google.com/recaptcha/api/siteverify", data);
             console.log(res);
             getPopup("success", "success");
         } catch (err) {
