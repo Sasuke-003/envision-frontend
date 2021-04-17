@@ -17,11 +17,3 @@ export const user = {
     },
 
 };
-
-setTimeout( async () => {
-    console.log( await user.signIn({
-        email: "a@gmail.com",
-        pass: "admin999",
-    }) )
-    console.log( await axios.post( "/department/add", { code: "LOL", name: "Comp" } ) );
-}, 2000 );
