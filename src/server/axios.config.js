@@ -1,10 +1,10 @@
 import axios from "axios";
-import { api } from "./api";
 import { Logger } from "./logger";
-
+import { getPopup } from "../Util";
+import { token } from "./apis/token.api";
 const log = new Logger();
 
-axios.defaults.baseURL = "http://localhost:9999";
+axios.defaults.baseURL = "http://localhost:8080";
 axios.defaults.withCredentials = true;
 axios.defaults.headers.common["Authorization"] = "";
 
@@ -14,7 +14,7 @@ axios.interceptors.request.use(
         return req;
     },
     (err) => {
-        console.warn("Something went wrong in Req-Interceptor");
+        getPopup( "error", "Req-Interceptor Error, Try After Sometime")
         console.log(err);
         return Promise.reject(err);
     }
@@ -27,34 +27,29 @@ axios.interceptors.response.use(
     },
 
     async (err) => {
-        const failedReq = err.config;
+        const failedRequest = err.config;
 
         log.response(err);
-        const code = err?.response?.data?.code;
-
+        const errType = err?.response?.data?.err;
+        if (err?.response?.data?.info) getPopup( "error", err.response.data.info );
         // If Server isn't running code will be undefined
-        if (code === undefined) {
-            console.warn("FAILED:  Cannot reach the server or invalid URL");
+        if ( errType === undefined ) {
+            getPopup("error", "Server Offline, Try After Sometime..." );
             return Promise.reject(err?.response?.data);
-        } else
-            switch (code) {
-                case 2: // code(2) -> Token Invalid
-                case 9: // code(9) -> Refresh Token Expired
-                    // Force Sign Out
-                    return api.user.signOut();
+        } else{
+            switch ( errType ) {
+                case "InvalidToken": // Falls Through
+                case "TokenExpired": 
+                    
+                    // If There is any token error while refreshing token then sign-out immediately
+                    if ( err.config.url === "/tok/refresh" ) return token.clearToken();
 
-                case 11: // code(11) -> Access Token Not Found
-                    // Since this happens only once while reloading the page, a request to obtain new refTok is made.
-                    await api.token.newRefreshToken();
-                // falls through after successfully obtaining the new token, ( obtains only if timed out -> present in localStorage as "nextRefreshTime" )
-
-                case 8: // code(8) -> Access Token Expired - Get new Access Token And Retry "failedReq" ( happens automatically )
-                    return await api.token.newAccessToken(failedReq);
-
-                default:
-                    break;
-                // if (err?.response?.data?.info) alert(err.response.data.info);
+                    // Otherwise Obtain refresh token and retry failed request
+                    return token.getNewTokenAndRetry( failedRequest );
+                    
+                default: break;
             }
+        }
         return Promise.reject(err);
     }
 );

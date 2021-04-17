@@ -1,43 +1,29 @@
 import axios  from "axios";
-import moment from 'moment';
-import { user } from './user.api';
 
-
+import { setUserStatus, setUserToken } from "../../Util"
 const url = {
-    newAccTok : "/token/acc-tok",
-    newRefTok : "/token/ref-tok",
+    newToken : "/tok/refresh",
+    clearToken : "/tok/clear",
 }
 
 export const token = {
 
-    newAccessToken : async ( reqToBeRetried ) => {
-        const res = await axios.get( url.newAccTok );
+    getNewTokenAndRetry : async ( reqToBeRetried ) => {
+        const res = await axios.get( url.newToken );
         try {
-            axios.defaults.headers.common['Authorization'] = res.AccessToken ;
-            if( reqToBeRetried ) return await retryReq( reqToBeRetried );
+            axios.defaults.headers.common['Authorization'] = res.accTok ;
+            return await retryReq( reqToBeRetried );
         } catch (err) { throw res; }
-        return res;
     },
 
-    newRefreshToken : async () => {
-
-        // Next Refresh Time of Refresh Token
-        const nextRefreshTime = localStorage.getItem( "nextRefreshTime" );
-    
-        try {
-    
-            if ( moment(nextRefreshTime) < moment() ) {
-                localStorage.setItem( "nextRefreshTime" , moment().add(1,'days') )
-                const res = await axios.get( url.newRefTok );
-                axios.defaults.headers.common['Authorization'] = res.AccessToken ;
-                return res;
-            }
-
-        } catch( err ) {
-            await user.signOut();
-            throw err;
-        }
+    clearToken : () => {
+        clearAllData();
+        axios.create({
+            baseURL: axios.defaults.baseURL,
+            withCredentials: true,
+        }).get( url.clearToken );
     }
+
 }
 
 async function retryReq( req ) {
@@ -45,4 +31,15 @@ async function retryReq( req ) {
     // because the data part will be in string format which has to be converted to json obj before sending
     if( req.data ) req.data = JSON.parse( `${req.data}` ) ;
     return await axios.request( req ) ; 
+}
+
+// Executed During signOut ( found in request.user.signOut )
+function clearAllData() {
+    localStorage.clear();
+    // Clears all Cookie  ( From : https://stackoverflow.com/questions/179355/clearing-all-cookies-with-javascript )
+    document.cookie.split(";").forEach(function (c) {
+        document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+    });
+    setUserToken( null );
+    setUserStatus( "isLoggedIn", false );
 }
