@@ -18,6 +18,8 @@ export const setUserStatus = (status, value) => setCurrentUserStatus(status, val
 
 export const setUserToken = (token) => setCurrentUserToken(token);
 
+export const getToken = () => store.getState().userToken;
+
 /*
 getPopup(status, msg)
 status ->   success, error, warning, info
