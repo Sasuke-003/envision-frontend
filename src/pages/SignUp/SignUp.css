@@ -3,6 +3,7 @@
     flex-direction: column;
     text-align: center;
     align-items: center;
+    margin-bottom: 50vh;
 }
 
 .signup__btn {
@@ -42,4 +43,51 @@
     border: 2px solid #14213d;
     padding: 5px 10px 5px 10px;
     font-weight: 900;
+}
+
+.signUp__mainText {
+    font-family: "Poppins", sans-serif;
+    margin: 2vh 0 0.1vh 0;
+    width: 90%;
+    max-width: 500px;
+    text-align: left;
+}
+.signUp__topText {
+    font-family: "Poppins", sans-serif;
+    margin: 1vh 0 2vh 0;
+    width: 90%;
+    max-width: 500px;
+    text-align: left;
+    font-size: 2.5rem;
+    position: relative;
+}
+
+.signUp__topText::after {
+    content: "cannot login?";
+    font-family: "OpenSans", sans-serif;
+    position: absolute;
+    font-size: medium;
+    bottom: -7%;
+    left: 20%;
+}
+
+.signUp__content {
+    width: 90%;
+    max-width: 500px;
+    text-align: left;
+}
+
+.signUp__terms {
+    font-family: "Open Sans", sans-serif;
+    font-size: 0.75rem;
+}
+
+.MuiFormControlLabel-label {
+    font-family: "Open Sans", sans-serif !important;
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+}
+
+.grecaptcha-badge {
+    display: none;
 }

@@ -1,7 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -12,7 +11,7 @@ import DoneAllRoundedIcon from "@material-ui/icons/DoneAllRounded";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        marginBottom: "4vh",
+        marginBottom: "5vh",
         backdropFilter: "blur(4px)",
         backgroundColor: "rgba(255, 255, 255, 0.2)",
         width: "90%",
@@ -52,6 +51,7 @@ function EventCardV2({
     isRegistrationClosed = true,
     name = "Paper Presentation",
     history,
+    el,
 }) {
     const classes = useStyles();
 

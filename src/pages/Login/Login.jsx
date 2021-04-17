@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         "& .MuiTextField-root": {
             margin: theme.spacing(1),
-            width: "100%",
+            width: "80%",
             maxWidth: "500px",
             color: "black",
         },
@@ -24,10 +24,10 @@ const useStyles = makeStyles((theme) => ({
             color: "black",
             // fontFamily: "'Poppins', sans-serif",
         },
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        width: "90%",
+        // display: "flex",
+        // flexDirection: "column",
+        // justifyContent: "center",
+        // width: "90%",
     },
     progress: {
         color: "#f8b6cc",
@@ -57,25 +57,21 @@ function Login({ history, setCurrentUserStatus }) {
                     value={email}
                     type='email'
                     onChange={(e) => setEmail(e.target.value)}
-                    id='outlined-error-helper-text'
                     label='EMAIL'
                     error={emailErrorMsg === "" ? false : true}
                     helperText={emailErrorMsg}
                     variant='outlined'
-                    style={{ margin: 0, marginBottom: "3vh" }}
                     fullWidth
                 />
 
                 <TextField
                     value={pass}
                     onChange={(e) => setPass(e.target.value)}
-                    id='outlined-error-helper-text'
                     type='password'
                     label='PASSWORD'
                     error={passErrorMsg === "" ? false : true}
                     helperText={passErrorMsg}
                     variant='outlined'
-                    style={{ margin: 0, marginBottom: "3vh" }}
                 />
                 <Recaptcha
                     render='explicit'
@@ -83,19 +79,18 @@ function Login({ history, setCurrentUserStatus }) {
                     sitekey='6LfDTawaAAAAALjcHHw3DhIpSWaXork6_SngNf7n'
                     onResolved={() => setCurrentUserStatus(["isLoggedIn", true])}
                     onError={() => alert("error")}
-                    onExpired={() => alert("expired")}
+                    onExpired={() => recaptchaRef.current.reset()}
                 />
-                <CustomButton onClick={handleLogin}>
-                    {isComputing ? null : "LOGIN  "}
-                    {/* &nbsp; */}
-                    {isComputing ? (
-                        <CircularProgress className={classes.progress} size='30px' />
-                    ) : (
-                        <ExitToAppIcon fontSize='large' style={{ color: "#f8b6cc" }} />
-                    )}
-                </CustomButton>
             </form>
+            <CustomButton
+                onClick={handleLogin}
+                size='large'
+                endIcon={isComputing ? null : <ExitToAppIcon />}
+                style={{ fontSize: "1.2rem", width: "80%", maxWidth: "500px", marginTop: "1vh" }}>
+                {isComputing ? null : "LOGIN  "}
 
+                {isComputing ? <CircularProgress className={classes.progress} size='30px' /> : null}
+            </CustomButton>
             <div className='login__link'>
                 <div
                     className='login__signUpBtn'

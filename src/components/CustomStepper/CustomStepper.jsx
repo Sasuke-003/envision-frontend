@@ -145,6 +145,7 @@ function getSteps() {
 
 const useStyles = makeStyles((theme) => ({
     root: {
+        marginTop: "1vh",
         background: "rgba(255,255,255,0) !important",
     },
 }));

@@ -36,7 +36,7 @@ export default function InvitePopup({ open, handleClose }) {
     const handleInvite = () => {
         handleClose();
         setOpenSnackbar(true);
-        getPopup("success", "Email Sent");
+        getPopup("success", "Invitation mail has been sent");
     };
 
     return (
@@ -61,10 +61,10 @@ export default function InvitePopup({ open, handleClose }) {
                     />
                 </DialogContent>
                 <DialogActions className={classes.root}>
-                    <Button onClick={handleClose} color='primary'>
+                    <Button onClick={handleClose} color='primary' style={{ color: "red", fontWeight: "600" }}>
                         Cancel
                     </Button>
-                    <Button onClick={handleInvite} color='primary'>
+                    <Button onClick={handleInvite} color='primary' style={{ color: "green", fontWeight: "600" }}>
                         Invite
                     </Button>
                 </DialogActions>

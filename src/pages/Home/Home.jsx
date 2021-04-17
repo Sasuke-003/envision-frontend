@@ -22,12 +22,16 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "rgba(0,0,0,0)",
         color: "black",
         backdropFilter: "none",
+        scrollBehavior: "smooth",
     },
     tabHead: {
         background: "rgba(0,0,0,0) !important",
     },
     dep: {
         fontSize: "1rem",
+    },
+    swipe: {
+        transition: "transform 1s cubic-bezier(0.43, 0.07, 0.82, 1.01) 0s !important",
     },
 }));
 
@@ -72,14 +76,14 @@ function Home() {
                     variant='scrollable'
                     aria-label='full width tabs example'>
                     {departments.map((department, index) => (
-                        <Tab className={classes.dep} label={department} {...a11yProps(index)} />
+                        <Tab className={classes.dep} label={department} key={department} {...a11yProps(index)} />
                     ))}
                 </Tabs>
             </AppBar>
-            <SwipeableViews index={value} onChangeIndex={handleChangeIndex}>
+            <SwipeableViews index={value} onChangeIndex={handleChangeIndex} disableLazyLoading>
                 {departments.map((department, index) => (
                     <TabPanel
-                        key={"tab" + index}
+                        key={value + "tab" + index}
                         value={value}
                         index={index}
                         dir={theme.direction}

@@ -9,11 +9,14 @@ function TabPanel(props) {
         <div
             className='home'
             role='tabpanel'
-            hidden={value !== index}
+            // hidden={value !== index}
             id={`full-width-tabpanel-${index}`}
             aria-labelledby={`full-width-tab-${index}`}
             {...other}>
-            {activeIndex === index ? events.map((index) => <EventCardV2 key={index + "a" + activeIndex} />) : null}
+            {activeIndex === index ? events.map((event, i) => <EventCardV2 key={i + "a" + activeIndex} />) : null}
+            {/* {events.map((index) => (
+                <EventCardV2 key={index + "a" + activeIndex} />
+            ))} */}
         </div>
     );
 }
