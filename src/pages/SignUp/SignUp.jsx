@@ -179,6 +179,7 @@ import CustomButton from "../../components/CustomButton/CustomButton";
 import MenuItem from "@material-ui/core/MenuItem";
 import Recaptcha from "react-invisible-recaptcha";
 import { getPopup } from "../../Util";
+import { api } from "../../server";
 import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
@@ -204,8 +205,8 @@ function SignUp() {
     const classes = useStyles();
     const [fullName, setFullName] = useState("Hafeez");
     const [email, setEmail] = useState("muhammadhafeez@gmail.com");
-    const [usn, setUsn] = useState("asdas");
-    const [gender, setGender] = useState("MALE");
+    const [usn, setUsn] = useState("4SN17CS052");
+    const [gender, setGender] = useState("M");
     const [pass, setPass] = useState("12345678");
     const [rPass, setRPass] = useState("12345678");
     const [tcAccepted, setTcAccepted] = useState(true);
@@ -222,12 +223,21 @@ function SignUp() {
             getPopup("error", "Full Name cannot be empty!");
             return;
         }
+        if (fullName.length < 4 || fullName.length > 40) {
+            getPopup("error", "Full Name must be between 4 and 40 characters");
+            return;
+        }
         if (email === "") {
             getPopup("error", "Email Id cannot be empty!");
             return;
         }
+
         if (emailErrorMsg !== "") {
             getPopup("error", "Enter valid email id!");
+            return;
+        }
+        if (email.length < 12 || email.length > 50) {
+            getPopup("error", "Email must be between 11 and 50 characters");
             return;
         }
         if (usn === "") {
@@ -251,19 +261,21 @@ function SignUp() {
     };
 
     const afterVerification = async (token) => {
-        const data = {
-            secret: "6LfDTawaAAAAAP7kCPYLRD6UHnuf9hbFDTiXeOVI",
+        const signUpData = {
+            email: email,
+            pass: pass,
+            name: fullName,
+            gender: gender,
+            usn: usn,
+            contact: "9731299294",
+            reCaptchaToken: token,
         };
-
         try {
-            const res = await axios.post("https://www.google.com/recaptcha/api/siteverify", data);
-            console.log(res);
+            const res = await api.user.signUp(signUpData);
             getPopup("success", "success");
-        } catch (err) {
-            getPopup("error", "failed");
+        } catch (e) {
+            console.log(e);
         }
-
-        console.log(token);
     };
 
     const handleNameChange = (event) => {
@@ -290,7 +302,7 @@ function SignUp() {
     };
     const handlePassChange = (event) => {
         const value = event.target.value;
-        if (value.length <= 16) setPass(value);
+        if (value.length < 16) setPass(value);
         if (value.length < 8 && value.length !== 0) {
             setPassErrorMsg("Password must include at least 8 characters!");
         } else {
@@ -304,7 +316,7 @@ function SignUp() {
     };
     const handleRPassChange = (event) => {
         const value = event.target.value;
-        if (value.length <= 16) setRPass(value);
+        if (value.length < 16) setRPass(value);
         if (pass !== value && value.length !== 0) {
             setRPassErrorMsg("Password does not match!");
         } else {
@@ -331,6 +343,7 @@ function SignUp() {
                     helperText={fullNameErrorMsg}
                     variant='outlined'
                     size='small'
+                    inputProps={{ style: { textTransform: "uppercase" } }}
                 />
                 <TextField
                     value={email}
@@ -352,11 +365,10 @@ function SignUp() {
                     style={{ textAlign: "left" }}
                     variant='outlined'>
                     {[
-                        { key: 0, label: "MALE" },
-                        { key: 1, label: "FEMALE" },
-                        { key: 3, label: "OTHER" },
+                        { key: 0, label: "MALE", value: "M" },
+                        { key: 1, label: "FEMALE", value: "F" },
                     ].map((option) => (
-                        <MenuItem key={option.key} value={option.label}>
+                        <MenuItem key={option.key} value={option.value}>
                             {option.label}
                         </MenuItem>
                     ))}

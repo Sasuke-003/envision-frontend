@@ -8,7 +8,6 @@ import { withRouter } from "react-router";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { connect } from "react-redux";
 import { setCurrentUserStatus } from "../../redux/userStatus/userStatus.actions";
-
 import CustomButton from "../../components/CustomButton/CustomButton";
 import Recaptcha from "react-invisible-recaptcha";
 
@@ -22,12 +21,7 @@ const useStyles = makeStyles((theme) => ({
         },
         "& .MuiFormLabel-root": {
             color: "black",
-            // fontFamily: "'Poppins', sans-serif",
         },
-        // display: "flex",
-        // flexDirection: "column",
-        // justifyContent: "center",
-        // width: "90%",
     },
     progress: {
         color: "#f8b6cc",
@@ -49,6 +43,7 @@ function Login({ history, setCurrentUserStatus }) {
 
         recaptchaRef.current.execute();
     };
+
     return (
         <div className='login'>
             <div className='login__logo'></div>
@@ -88,7 +83,6 @@ function Login({ history, setCurrentUserStatus }) {
                 endIcon={isComputing ? null : <ExitToAppIcon />}
                 style={{ fontSize: "1.2rem", width: "80%", maxWidth: "500px", marginTop: "1vh" }}>
                 {isComputing ? null : "LOGIN  "}
-
                 {isComputing ? <CircularProgress className={classes.progress} size='30px' /> : null}
             </CustomButton>
             <div className='login__link'>
