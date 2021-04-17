@@ -4,7 +4,7 @@ import { getPopup } from "../Util";
 import { token } from "./apis/token.api";
 const log = new Logger();
 
-axios.defaults.baseURL = "http://localhost:8080";
+axios.defaults.baseURL = "https://sit-envision.herokuapp.com";
 axios.defaults.withCredentials = true;
 axios.defaults.headers.common["Authorization"] = "";
 
@@ -46,7 +46,7 @@ axios.interceptors.response.use(
 
                     // Otherwise Obtain refresh token and retry failed request
                     return token.getNewTokenAndRetry( failedRequest );
-                    
+
                 default: break;
             }
         }
