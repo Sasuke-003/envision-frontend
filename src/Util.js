@@ -14,9 +14,9 @@ export const throwMsg = (open, handleClose, status, msg) => <Snackbars open={ope
 
 export const getPopup = (status, msg) => store.dispatch(openSnackbar({ open: true, status: status, msg: msg }));
 
-export const setUserStatus = (status, value) => setCurrentUserStatus(status, value); //
+export const setUserStatus = (status, value) => store.dispatch(setCurrentUserStatus([status, value]));
 
-export const setUserToken = (token) => setCurrentUserToken(token);
+export const setUserToken = (token) => store.dispatch(setCurrentUserToken(token));
 
 export const getToken = () => store.getState().userToken;
 

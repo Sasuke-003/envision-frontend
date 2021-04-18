@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import "./Login.css";
 import { makeStyles } from "@material-ui/core/styles";
@@ -9,7 +9,8 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { connect } from "react-redux";
 import { setCurrentUserStatus } from "../../redux/userStatus/userStatus.actions";
 import CustomButton from "../../components/CustomButton/CustomButton";
-import Recaptcha from "react-invisible-recaptcha";
+import { api } from "../../server";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -31,17 +32,35 @@ const useStyles = makeStyles((theme) => ({
 function Login({ history, setCurrentUserStatus }) {
     const classes = useStyles();
     const [isComputing, setIsComputing] = useState(false);
-    const [email, setEmail] = useState("");
-    const [pass, setPass] = useState("");
+    const [email, setEmail] = useState("mdhafeez@gmail.com");
+    const [pass, setPass] = useState("12345678");
     const [emailErrorMsg, setEmailErrorMsg] = useState("");
     const [passErrorMsg, setPassErrorMsg] = useState("");
-    const recaptchaRef = React.createRef();
+    const recaptchaRef = useRef();
+    const grecaptchaObject = window.grecaptcha;
 
-    const handleLogin = () => {
+    useEffect(() => {
+        const initialize = () => {
+            recaptchaRef.current.reset();
+        };
+        initialize();
+    }, []);
+
+    const handleLogin = async () => {
         setIsComputing(true);
-        // setCurrentUserStatus(["isLoggedIn", true]);
-
-        recaptchaRef.current.execute();
+        const token = await recaptchaRef.current.executeAsync();
+        recaptchaRef.current.reset();
+        const LoginData = {
+            email: email,
+            pass: pass,
+            reCaptchaToken: token,
+        };
+        try {
+            await api.user.signIn(LoginData);
+            setCurrentUserStatus(["isLoggedIn", true]);
+        } catch (e) {
+            setIsComputing(false);
+        }
     };
 
     return (
@@ -68,12 +87,12 @@ function Login({ history, setCurrentUserStatus }) {
                     helperText={passErrorMsg}
                     variant='outlined'
                 />
-                <Recaptcha
-                    render='explicit'
-                    ref={recaptchaRef}
+                <ReCAPTCHA
                     sitekey='6LfDTawaAAAAALjcHHw3DhIpSWaXork6_SngNf7n'
-                    onResolved={() => setCurrentUserStatus(["isLoggedIn", true])}
-                    onError={() => alert("error")}
+                    size='invisible'
+                    ref={recaptchaRef}
+                    grecaptcha={grecaptchaObject}
+                    onErrored={() => recaptchaRef.current.reset()}
                     onExpired={() => recaptchaRef.current.reset()}
                 />
             </form>

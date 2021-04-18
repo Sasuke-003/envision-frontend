@@ -18,6 +18,8 @@ import PowerSettingsNewRoundedIcon from "@material-ui/icons/PowerSettingsNewRoun
 import InputIcon from "@material-ui/icons/Input";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import HomeIcon from "@material-ui/icons/Home";
+import { api } from "../../server";
+import { getPopup } from "../../Util";
 
 const useStyles = makeStyles({
     list: {
@@ -49,10 +51,14 @@ function Header({ history, userStatus, setCurrentUserIsLoggedIn }) {
                                 <ListItem
                                     button
                                     key={3}
-                                    onClick={() => {
-                                        setCurrentUserIsLoggedIn(false);
-                                        history.push("/login");
-                                        setOpen(false);
+                                    onClick={async () => {
+                                        try {
+                                            api.token.clearToken();
+                                            history.push("/login");
+                                            setOpen(false);
+                                        } catch (e) {
+                                            getPopup("error", "Something went wrong, Cannot logout right now");
+                                        }
                                     }}>
                                     <ListItemIcon>
                                         <PowerSettingsNewRoundedIcon style={{ color: "white" }} />

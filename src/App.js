@@ -14,7 +14,7 @@ import Profile from "./pages/Profile/Profile";
 import Navbar from "./components/Navbar/Navbar";
 import EventDetail from "./pages/EventDetail/EventDetail";
 import AttendanceMarker from "./components/QrScanner/QrSCanner";
-import { throwMsg, getToken } from "./Util";
+import { throwMsg } from "./Util";
 import { openSnackbar } from "./redux/snackbar/snackbar.actions";
 
 class App extends React.Component {
@@ -34,7 +34,6 @@ class App extends React.Component {
                     <Route exact path='/attendanceMarker' render={() => (!isLoggedIn ? <Redirect to='/login' /> : <AttendanceMarker />)} />
                     <Route path='/event/:id' render={() => <EventDetail />} />
                 </Switch>
-                {console.log(getToken())}
                 {throwMsg(snackbarStatus.open, () => openSnackbar({ open: false, status: "", msg: "" }), snackbarStatus.status, snackbarStatus.msg)}
                 {isLoggedIn ? <Navbar /> : null}
             </div>
