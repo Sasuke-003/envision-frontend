@@ -4,6 +4,7 @@ const INITIAL_STATE = {
     currentUserStatus: {
         isLoggedIn: false,
         isAdmin: false,
+        tabStatus: 1,
     },
 };
 

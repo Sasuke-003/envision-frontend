@@ -4,7 +4,7 @@ import EventCardV2 from "../../components/EventCardV2/EventCardV2";
 
 function TabPanel(props) {
     const { children, value, index, activeIndex, ...other } = props;
-    const [events, setEvents] = useState([{}, {}, {}, {}]);
+    const [events, setEvents] = useState([{}, {}, {}, {}, {}]);
     return (
         <div
             className='home'

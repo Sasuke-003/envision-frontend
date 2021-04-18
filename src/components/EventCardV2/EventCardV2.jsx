@@ -57,7 +57,7 @@ function EventCardV2({
 
     return (
         <Card className={classes.root} onClick={() => history.push("/event/" + id)}>
-            <CardMedia className={classes.media} image='/img/coderscrusade.png' title='Contemplative Reptile' />
+            {/* <CardMedia className={classes.media} image='/img/coderscrusade.png' title='Contemplative Reptile' /> */}
             <CardContent className={classes.content}>
                 <Typography gutterBottom variant='h5' component='h2' className={classes.main}>
                     {name}

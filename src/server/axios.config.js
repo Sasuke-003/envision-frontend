@@ -4,7 +4,7 @@ import { getPopup } from "../Util";
 import { token } from "./apis/token.api";
 const log = new Logger();
 
-axios.defaults.baseURL = "http://localhost:8080";
+axios.defaults.baseURL = "http://192.168.75.81:8080";
 axios.defaults.withCredentials = true;
 axios.defaults.headers.common["Authorization"] = "";
 
@@ -14,7 +14,7 @@ axios.interceptors.request.use(
         return req;
     },
     (err) => {
-        getPopup( "error", "Req-Interceptor Error, Try After Sometime")
+        getPopup("error", "Req-Interceptor Error, Try After Sometime");
         console.log(err);
         return Promise.reject(err);
     }
@@ -31,23 +31,23 @@ axios.interceptors.response.use(
 
         log.response(err);
         const errType = err?.response?.data?.err;
-        if (err?.response?.data?.info) getPopup( "error", err.response.data.info );
+        if (err?.response?.data?.info) getPopup("error", err.response.data.info);
         // If Server isn't running code will be undefined
-        if ( errType === undefined ) {
-            getPopup("error", "Server Offline, Try After Sometime..." );
+        if (errType === undefined) {
+            getPopup("error", "Server Offline, Try After Sometime...");
             return Promise.reject(err?.response?.data);
-        } else{
-            switch ( errType ) {
+        } else {
+            switch (errType) {
                 case "InvalidToken": // Falls Through
-                case "TokenExpired": 
-                    
+                case "TokenExpired":
                     // If There is any token error while refreshing token then sign-out immediately
-                    if ( err.config.url === "/tok/refresh" ) return token.clearToken();
+                    if (err.config.url === "/tok/refresh") return token.clearToken();
 
                     // Otherwise Obtain refresh token and retry failed request
-                    return token.getNewTokenAndRetry( failedRequest );
+                    return token.getNewTokenAndRetry(failedRequest);
 
-                default: break;
+                default:
+                    break;
             }
         }
         return Promise.reject(err);
