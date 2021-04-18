@@ -14,6 +14,7 @@ import Profile from "./pages/Profile/Profile";
 import Navbar from "./components/Navbar/Navbar";
 import EventDetail from "./pages/EventDetail/EventDetail";
 import AttendanceMarker from "./components/QrScanner/QrSCanner";
+import AccountActivation from "./pages/AccountActivation/AccountActivation";
 import { throwMsg } from "./Util";
 import { openSnackbar } from "./redux/snackbar/snackbar.actions";
 
@@ -32,6 +33,7 @@ class App extends React.Component {
                     <Route exact path='/vip' render={() => (!isLoggedIn ? <Redirect to='/login' /> : <Certificate />)} />
                     <Route exact path='/profile' render={() => (!isLoggedIn ? <Redirect to='/login' /> : <Profile />)} />
                     <Route exact path='/attendanceMarker' render={() => (!isLoggedIn ? <Redirect to='/login' /> : <AttendanceMarker />)} />
+                    <Route path='/account-activation/:id' render={() => <AccountActivation />} />
                     <Route path='/event/:id' render={() => <EventDetail />} />
                 </Switch>
                 {throwMsg(snackbarStatus.open, () => openSnackbar({ open: false, status: "", msg: "" }), snackbarStatus.status, snackbarStatus.msg)}
