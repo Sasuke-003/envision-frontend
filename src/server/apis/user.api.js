@@ -3,6 +3,8 @@ import axios from "axios";
 const url = {
     signUp: "/user/sign-up",
     signIn: "/user/sign-in",
+    verifyEmail: "/user/verify-email",
+    checkOut: "/user/vip-checkout",
 };
 
 export const user = {
@@ -15,5 +17,12 @@ export const user = {
         axios.defaults.headers.common["Authorization"] = `Bearer ${res.accTok}`;
         return res;
     },
-
+    verifyEmail: async (verifyEmailData) => {
+        const res = await axios.post(url.verifyEmail, verifyEmailData);
+        return res;
+    },
+    checkOut: async (checkOutData) => {
+        const res = await axios.post(url.checkOut, checkOutData);
+        return res;
+    },
 };

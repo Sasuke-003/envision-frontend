@@ -321,6 +321,8 @@ import CustomButton from "../../components/CustomButton/CustomButton";
 import MenuItem from "@material-ui/core/MenuItem";
 import ReCAPTCHA from "react-google-recaptcha";
 import { getPopup } from "../../Util";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { withRouter } from "react-router";
 import { api } from "../../server";
 import axios from "axios";
 
@@ -341,12 +343,15 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "center",
         width: "100%",
     },
+    progress: {
+        color: "#f8b6cc",
+    },
 }));
 
-function SignUp() {
+function SignUp({ history }) {
     const classes = useStyles();
     const [fullName, setFullName] = useState("HAFEEZ");
-    const [email, setEmail] = useState("haf@gmail.com");
+    const [email, setEmail] = useState("muhammadhafeez896@gmail.com");
     const [usn, setUsn] = useState("4SN17CS052");
     const [gender, setGender] = useState("M");
     const [pass, setPass] = useState("12345678");
@@ -357,7 +362,7 @@ function SignUp() {
     const [usnErrorMsg, setUsnErrorMsg] = useState("");
     const [passErrorMsg, setPassErrorMsg] = useState("");
     const [rPassErrorMsg, setRPassErrorMsg] = useState("");
-
+    const [isComputing, setIsComputing] = useState(false);
     const recaptchaRef = useRef();
     const grecaptchaObject = window.grecaptcha;
 
@@ -369,6 +374,7 @@ function SignUp() {
     }, []);
 
     const handleSignUp = async () => {
+        setIsComputing(true);
         if (fullName === "") {
             getPopup("error", "Full Name cannot be empty!");
             return;
@@ -420,8 +426,11 @@ function SignUp() {
         };
         try {
             await api.user.signUp(signUpData);
+            history.push("/login");
             getPopup("success", "Activation link has been sent to your email");
-        } catch (error) {}
+        } catch (error) {
+            setIsComputing(false);
+        }
     };
 
     const handleNameChange = (event) => {
@@ -599,10 +608,10 @@ function SignUp() {
                 style={{ width: "90%", marginTop: "2vh", maxWidth: "500px", fontSize: "1.2rem" }}
                 onClick={handleSignUp}
                 disabled={!tcAccepted}>
-                SIGNUP
+                {isComputing ? <CircularProgress className={classes.progress} size='30px' /> : "SIGN UP"}
             </CustomButton>
         </div>
     );
 }
 
-export default SignUp;
+export default withRouter(SignUp);

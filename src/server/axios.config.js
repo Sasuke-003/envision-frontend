@@ -4,7 +4,7 @@ import { getPopup } from "../Util";
 import { token } from "./apis/token.api";
 const log = new Logger();
 
-axios.defaults.baseURL = "http://192.168.75.81:8080";
+axios.defaults.baseURL = "http://localhost:8080";
 axios.defaults.withCredentials = true;
 axios.defaults.headers.common["Authorization"] = "";
 

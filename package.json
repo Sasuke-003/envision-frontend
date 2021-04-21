@@ -22,6 +22,7 @@
         "react-redux": "^7.2.3",
         "react-router-dom": "^5.2.0",
         "react-scripts": "^4.0.3",
+        "react-stripe-checkout": "^2.6.3",
         "react-swipeable-views": "^0.13.9",
         "react-webcam-barcode-scanner": "0.0.2-rc2",
         "reactive-qr": "^0.1.8",

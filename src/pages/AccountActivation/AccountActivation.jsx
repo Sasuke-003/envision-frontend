@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { withRouter } from "react-router";
 import { makeStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
-
+import CustomButton from "../../components/CustomButton/CustomButton";
+import ReCAPTCHA from "react-google-recaptcha";
 import "./AccountActivation.css";
 import { api } from "../../server";
 
@@ -16,9 +17,11 @@ const useStyles = makeStyles((theme) => ({
 function AccountActivation({ history, match }) {
     const classes = useStyles();
     const [activated, setActivated] = useState(false);
-    const [isReqData, setIsReqData] = useState(true);
+    const [isReqData, setIsReqData] = useState(false);
     const [timer, setTimer] = useState("");
-    const [counter, setCounter] = useState(60);
+    const [counter, setCounter] = useState(1000);
+    const recaptchaRef = useRef();
+    const grecaptchaObject = window.grecaptcha;
     const startCounter = () => {
         setTimer(
             setInterval(() => {
@@ -27,15 +30,28 @@ function AccountActivation({ history, match }) {
         );
     };
 
-    useEffect(() => {
-        const getData = () => {
-            try {
-                // const res = api
-                setIsReqData(false);
-                setActivated(true);
-            } catch (e) {}
+    const handleActivation = async () => {
+        const token = await recaptchaRef.current.executeAsync();
+        recaptchaRef.current.reset();
+        const verifyEmailData = {
+            tok: match.params.id,
+            reCaptchaToken: token,
         };
-        getData();
+        try {
+            setIsReqData(true);
+            await api.user.verifyEmail(verifyEmailData);
+            setIsReqData(false);
+            setActivated(true);
+        } catch (e) {
+            setIsReqData(false);
+        }
+    };
+
+    useEffect(() => {
+        const initialize = () => {
+            recaptchaRef.current.reset();
+        };
+        // initialize();
     }, []);
 
     useEffect(() => {
@@ -58,11 +74,25 @@ function AccountActivation({ history, match }) {
         </div>
     ) : (
         <div className='accountActivation'>
-            <h1 style={activated ? { color: "#17b978" } : { color: "#d72323" }}>
-                {activated ? "Your account has been Activated" : isReqData ? "" : "Invalid account id. Please signup again"}
+            {activated ? null : <h2 style={{ marginTop: "10vh" }}>Click blow to Activate your account</h2>}
+            {activated ? null : (
+                <CustomButton style={{ width: "90%", marginTop: "1vh", backgroundColor: "#ffffff20", color: "green" }} onClick={handleActivation}>
+                    ACTIVATE
+                </CustomButton>
+            )}
+            <h1 style={activated ? { color: "#17b978", marginTop: "10vh" } : { color: "#d72323", marginTop: "10vh" }}>
+                {activated ? "Your account has been Activated" : null}
             </h1>
             <br />
             {activated ? <h4>Redirecting to login page in {counter}</h4> : null}
+            <ReCAPTCHA
+                sitekey='6LfDTawaAAAAALjcHHw3DhIpSWaXork6_SngNf7n'
+                size='invisible'
+                ref={recaptchaRef}
+                grecaptcha={grecaptchaObject}
+                onErrored={() => recaptchaRef.current.reset()}
+                onExpired={() => recaptchaRef.current.reset()}
+            />
         </div>
     );
 }

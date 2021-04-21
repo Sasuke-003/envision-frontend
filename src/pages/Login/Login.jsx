@@ -43,7 +43,7 @@ function Login({ history, setCurrentUserStatus }) {
         const initialize = () => {
             recaptchaRef.current.reset();
         };
-        initialize();
+        // initialize();
     }, []);
 
     const handleLogin = async () => {
