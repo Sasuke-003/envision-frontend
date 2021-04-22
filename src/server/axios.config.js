@@ -31,7 +31,7 @@ axios.interceptors.response.use(
 
         log.response(err);
         const errType = err?.response?.data?.err;
-        if (err?.response?.data?.info) getPopup("error", err.response.data.info);
+        
         // If Server isn't running code will be undefined
         if (errType === undefined) {
             getPopup("error", "Server Offline, Try After Sometime...");
@@ -47,6 +47,7 @@ axios.interceptors.response.use(
                     return token.getNewTokenAndRetry(failedRequest);
 
                 default:
+                    if (err?.response?.data?.info) getPopup("error", err.response.data.info);
                     break;
             }
         }
